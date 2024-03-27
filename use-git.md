@@ -65,8 +65,17 @@ git pull 就是拉取数据，就是 git fetch 和 git merge 合并起来，将�
     所以一般先git clone 然后 git checkout -b binyun，再git push origin binyun， 这样远程仓库有一个自己的分支了，就可以随意push。  
     binyun是自己建立的分支名
 3. 更复杂的工作流  
+   1. 远程有更改，本地有 side1 side2 side3 三个更改，`git getch 、git rebase o/main side1 、git rebase side1 side2、git rebase side2 side3、git rebase side3 main、git push` 
+
+### 远程
+    git push是先将工作从 main 推到远程仓库中的 main 分支(同时会更新远程分支 o/main)
+    git pull是先下载到o/main，然后更新到main
+1. 怎么建立跟踪  
+   1. git checkout -b binyun o/main 新建binyun分支，跟踪远程分支
+   2. git branch -u o/main binyun，如果就在binyun分支上可以直接省略binyun
    
-   to be continued 。。。  
+
+   to be continued 。。。后续有需要继续学习  
    binyun 2024.3.27
 
 
