@@ -2,7 +2,9 @@
 # include<list>
 # include<array>
 # include<deque>
-#include<vector>
+# include<queue>
+# include<stack>
+# include<vector>
 using namespace std;
 
 int main(){
@@ -17,5 +19,6 @@ int main(){
     iterator_traits<vector<int>::iterator>::difference_type a;
     array<int, 10> arr;
     deque<int> d;  // 跳转看deque实现
-
+    queue<int> q;  // 跳转看queue实现
+    stack<int> s;  // 跳转看stack实现
 }

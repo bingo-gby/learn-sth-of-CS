@@ -68,7 +68,9 @@ pointer _M_end_of_storage;
 # forward_list
 单向链表，具体跟前面的双向环状链表大同小异。
 # deque queue 和 stack
-deque是双向队列..是底层container，是以不连续空间假装连续空间。
+deque是双向队列..是底层container，是以不连续空间假装连续空间。现在是设计每个buffer是512 bytes，元素个数就看 512/元素大小  
+queue和stack内含deque即可，但是这两个不可以随意访问，deque可以随意访问，实际使用感觉跟vector没啥区别...queue和stack也不允许遍历，因此也没有Iterator。
+
 
 
 
