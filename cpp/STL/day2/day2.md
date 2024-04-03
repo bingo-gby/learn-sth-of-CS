@@ -56,7 +56,21 @@ struct iterator_traits<const T*>{
 ```
 之后直接拿value_type就ok了，注意输入const T*的时候，输出还是T，因为得到是对象类型，其余的特性同样特化。  
 # vector
-vector相对来说比较简单，就是动态数组，数组用完之后，自动扩充。通常2倍扩充。
+vector相对来说比较简单，就是动态数组，数组用完之后，自动扩充。通常2倍扩充。通过三个指针来控制
+```
+pointer _M_start;
+pointer _M_finish;
+pointer _M_end_of_storage;
+```
+每一次扩容需要调用多次拷贝构造函数
+# Array
+静态数组,封装成container，便于使用算法，但实际上无ctor和dtor（构造函数和析构函数）
+# forward_list
+单向链表，具体跟前面的双向环状链表大同小异。
+# deque queue 和 stack
+deque是双向队列..是底层container，是以不连续空间假装连续空间。
+
+
 
 
 

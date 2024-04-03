@@ -1,5 +1,7 @@
 # include<iostream>
 # include<list>
+# include<array>
+# include<deque>
 #include<vector>
 using namespace std;
 
@@ -13,4 +15,7 @@ int main(){
     //     cout<<*i<<endl;
     // }
     iterator_traits<vector<int>::iterator>::difference_type a;
+    array<int, 10> arr;
+    deque<int> d;  // 跳转看deque实现
+
 }
