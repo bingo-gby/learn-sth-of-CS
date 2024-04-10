@@ -6,4 +6,4 @@
 day1 主要是基础、六大组件以及操作符重载、类模板、特化等概念
 day2 主要是讲序列式容器以及Iteartor_Traits的一些基础概念
 day3 主要是关联式容器以及源码阅读
-day4 主要是算法
+day4 主要是算法,以及iterator_category,以及仿函数、适配器
