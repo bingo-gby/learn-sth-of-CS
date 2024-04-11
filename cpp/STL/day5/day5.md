@@ -113,4 +113,7 @@ __ostream_type& operator<<(bool __n)
 ```
 因此cout可以输出很多东西...
 
+# moveable
+就是move函数，右值引用...
+
 
