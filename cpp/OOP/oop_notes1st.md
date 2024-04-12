@@ -126,6 +126,7 @@ complex():re(0),im(0){}
 普通对象：作用域结束就自动析构；    
 静态对象：作用域结束不析构，等程序结束，再析构，但是**超出作用域不能再使用了**；  
 全局对象：程序结束再析构；
+[对象代码示例](stack_heap.cpp)
 ```
 int a = 10;
 int main(){
@@ -147,6 +148,41 @@ pc->complex::complex(1,2);   // 构造函数
 ```
 delete转换为两个动作：先调用析构函数，再释放内存。  
 delete[] 调用多次析构函数，delete 只调用1次析构函数，所以 new[]一般就配合delete[]。
+## 4. class之间的关系
+见[class-class](class-class.cpp)
+### 1. 复合 has-a
+例如 queue底层实现是用deque，这就是复合。倘若b has a，那么构造是由内而外，先调用a构造函数，再调用b构造函数。析构相反，由外而内。
+```
+class A{
+public:
+    A(){
+        cout<<"A constructor"<<endl;
+    }
+    ~A(){
+        cout<<"A destructor"<<endl;
+    }
+};
+class B{
+public:
+    B(){
+        cout<<"B constructor"<<endl;
+    }
+    ~B(){
+        cout<<"B destructor"<<endl;
+    }
+    A a;
+};
+int main(){
+    /*
+    A constructor
+    B constructor
+    B destructor
+    A destructor
+    /*
+    B b;  
+    return 0;
+}
+```
 
 
 
