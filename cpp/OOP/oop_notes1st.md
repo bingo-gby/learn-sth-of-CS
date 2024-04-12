@@ -151,7 +151,7 @@ delete[] 调用多次析构函数，delete 只调用1次析构函数，所以 ne
 ## 4. class之间的关系
 见[class-class](class-class.cpp)
 ### 1. 复合 has-a
-例如 queue底层实现是用deque，这就是复合。倘若b has a，那么构造是由内而外，先调用a构造函数，再调用b构造函数。析构相反，由外而内。
+例如 queue底层实现是用deque，这就是复合。倘若b has a，那么构造是由内而外，先调用a构造函数，再调用b构造函数。析构相反，由外而内。是编译器帮你实现的。
 ```
 class A{
 public:
@@ -182,7 +182,25 @@ int main(){
     B b;  
     return 0;
 }
+``` 
+### 2. 委托关系
+跟复合有点像，但是不是A有一个object B，是A里面有个指向B的指针：
 ```
+class B{
+
+};
+class A{
+public:
+    B* b; // pimpl
+};
+```
+**这个有点像STL中的实现**，就是A里面的函数实现都丢给B* b，B中具体实现，所以b叫做pointer implement。具体可以去看源码。
+### 3. 继承关系 is-a  
+同样构造由内到外，析构由外到内。子类析构会自动调用父类析构，先析构自己后析构父类。  
+1. 继承 with 虚函数  
+   虚函数前面写virtual，函数不能讲继承，继承的是函数的调用权。
+   
+
 
 
 
