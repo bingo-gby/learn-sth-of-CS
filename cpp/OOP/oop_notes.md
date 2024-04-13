@@ -1,5 +1,5 @@
 # OOP notes 1st
-关于面向对象高级编程的笔记第一讲
+关于面向对象高级编程（上）的笔记
 
 ## 1. 头文件.h 和源文件 .cpp
 头文件声明，源文件实现，源文件包含头文件和 标准库的某些文件。包含头文件时：
@@ -194,11 +194,56 @@ public:
     B* b; // pimpl
 };
 ```
-**这个有点像STL中的实现**，就是A里面的函数实现都丢给B* b，B中具体实现，所以b叫做pointer implement。具体可以去看源码。
+**这个有点像STL中的实现**，就是A里面的函数实现都丢给B* b，B中具体实现，所以b叫做**pointer implement**。具体可以去看源码。
 ### 3. 继承关系 is-a  
 同样构造由内到外，析构由外到内。子类析构会自动调用父类析构，先析构自己后析构父类。  
 1. 继承 with 虚函数  
    虚函数前面写virtual，函数不能讲继承，继承的是函数的调用权。
+   >纯虚函数，子类必须重写  
+   >虚函数，子类可以选择重写，也可以选择不重写  
+   >非虚函数，子类不能重写
+2. 有继承有复合，ctor和dtor怎么考虑？  
+    1. b继承于a，b还有c  
+    ```
+    A constructor
+    C constructor
+    B constructor
+    B destructor
+    C destructor
+    A destructor
+    ```
+    b是最后，毋庸置疑，但是a和c的顺序需要看看，貌似还是子类优先，先构造a。
+    2. b继承于a，a有c  
+    ```
+    C constructor
+    A constructor
+    B constructor
+    B destructor
+    A destructor
+    C destructor
+    ```
+    这个毋庸置疑，构造由内而外，析构由外而内。
+### 4. 某些设计模式 [design_mode示例](design_mode.cpp)
+基于三种类之间的关系，进行面向对象设计，也被称为设计模式。  
+1. composite模式  
+    以文件系统为例，有目录有文件，目录里面可以放文件，目录和其他目录组合起来又可以放在新的目录里；这需要用到composite模式。  
+![composite模式](photos/composite.png)  
+file代表文件，component代表目录基类，下面composite为目录。
+所以目录要既能够添加目录也能够添加文件，所以让composite中的指针为component，file和composite都继承component。
+2. prototype模式(原型模式)  
+    >通过克隆自己来创建对象：原型就是具体类中有一个原型，但他不是供使用，而是供clone的；  
+    Client：客户端，代表使用原型模式的代码部分。客户端需要创建对象，但是它通过请求现有对象的克隆来创建新对象，而不是直接创建。
+    ![alt text](photos/prototype.png)
+
+# OOP notes 2nd
+关于面向对象高级编程（下）的笔记，主要谈对象模型、模板、泛型，更深层次了解this指针，虚指针、虚表等。
+
+
+
+
+
+
+
    
 
 
