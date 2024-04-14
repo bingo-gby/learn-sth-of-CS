@@ -355,8 +355,27 @@ auto进行类型自动推导，for循环在c++11中可以有新写法：
 关于虚表指针和虚表：虚表指针在内存里最前面。
 > 1. 讲义最下面是调用顺序转为C的写法。解释：首先 p 通过 -> 操作符访问其 vptr 成员，这是一个指针数组。然后，通过 [] 操作符使用索引 n 访问这个指针数组的第 n 个元素，得到一个新的指针。最后，* 操作符对这个新指针进行解引用，得到该指针指向的值。
 > 2. 两者等效，因为*的优先级最低。
+> 3. 后面的（p）是什么意思？ 前面的*取后是一个函数，p也是this，而函数的调用默认第一个参数就是this，所以是 `*p->vptr[n](p)`。
 
+### 2. 关于this
+this实际上是指向实例化对象的指针，或者说实例化对象的地址。所有的非静态成员函数都有this参数。
+动态绑定的三个条件：
+>1. 指针调用 
+>2. 可以向上转型（指向对象为子类对象）
+>3. 调用虚函数
 
+## 5. 额外需了解的
+### 1. 关于const
+const属于函数签名的一部分：当成员函数的const版本和 non-const版本**都存在**时，const object只调用const版本，non-const object只调用non-const版本。
+### 2. new 和 delete
+new 和 delete 的分解动作前面讲了，主要就是调用 operator new 和 operator delete函数。
+>1. 如果需要定制化操作，可以选择对operator new 和 operator delete 进行重载。  
+>2. 若无成员 operator new/operator delete 函数，直接调用全局的。
+>3. 如果想强制使用全局operator new/operator delete，可以`::operator new` 来强制使用，前面添加::。
+>4. 通常如果使用array new，分配的内存会多用个 counter 来存要调用多少次ctor/dtor(构造函数/析构函数)
+
+new有多个版本，第一参数必须是size_t(因为要传入开辟空间大小)，其余的参数是以placement arguements为初值，是placement new。例如 ` Foo* f = new(p)Foo(300);`前面p
+是传入的指针/或者说空间，后面的300是Foo初始化的值。  
 
 
 
