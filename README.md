@@ -1,3 +1,3 @@
 # learn sth of CS
-暂时只有git 和 cmake相关内容  
+现在包含 cmake c++ git linux_command等内容
 to be continued...
