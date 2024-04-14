@@ -236,7 +236,141 @@ file代表文件，component代表目录基类，下面composite为目录。
     ![alt text](photos/prototype.png)
 
 # OOP notes 2nd
-关于面向对象高级编程（下）的笔记，主要谈对象模型、模板、泛型，更深层次了解this指针，虚指针、虚表等。
+关于面向对象高级编程（下）的笔记，主要谈对象模型、模板、泛型，更深层次了解this指针，虚指针、虚表等。主要讲：
+> variadic template(since c++11)  
+> auto (since c++11)  
+> range-base for loop (since c++11)  
+
+## 1. functions相关
+### 1. conversion function 转换函数
+[代码示例example1](functions.cpp)，举例说明：
+```
+double a =3.1;
+int b = (int)a; // 这就是强制转换，double转为int
+```
+并且一般在赋值操作中都会默认转换，需要注意两点：
+>1. 不可以对转换函数写 returnType  
+>2. 编译器有时会自动做转换,但是如果转换路径比较多，就会有歧义，导致报错
+```
+class F{
+public:
+    F(int _a,int _b):a(_a),b(_b){}
+    // 并且不可以对转换函数指定 returnType
+    operator double(){
+        return (double)(a/b);
+    }
+private:
+    int a;
+    int b;
+};
+int main(){
+    F f(3,2);
+    double a = 4+f;   // 编译器会自动考虑使用 double(f)
+    cout<<a<<endl;
+}
+```
+### 2. non-explict-one-argument ctor 隐式转换函数
+[代码示例example2](functions.cpp)，explicit意为清楚，举例：
+```
+class A{
+public:
+    A(int num):num(num){}
+private:
+    int num;
+}
+
+// 可以将3自动转为class A
+int main(){
+    A a = 3
+}
+```
+**explicit也是关键字，只用于构造函数(禁止隐式构造)**
+### 3. pointer-like class(智能指针) 和 function-like class(仿函数)
+这里主要引出智能指针的概念和仿函数的概念即可。这里随便写个指针；如[pointer_like_class](pointer_like_class.cpp)。值得注意的是：
+>重载->的时候，按道理直接返回ptr，为何还会等同于 ptr->use():因为重载->的东西还会自动添加->进行操作。
+
+仿函数就是类重载（）,实现跟函数一样的功能。且通常会去继承 unary_function 或者binary_function。两者源码如下：  
+```
+// 一元
+template<typename _Arg, typename _Result>
+struct unary_function
+{
+    /// @c argument_type is the type of the argument
+    typedef _Arg 	argument_type;   
+
+    /// @c result_type is the return type
+    typedef _Result 	result_type;  
+};
+```
+```
+// 二元
+template<typename _Arg1, typename _Arg2, typename _Result>
+struct binary_function
+{
+    /// @c first_argument_type is the type of the first argument
+    typedef _Arg1 	first_argument_type; 
+
+    /// @c second_argument_type is the type of the second argument
+    typedef _Arg2 	second_argument_type;
+
+    /// @c result_type is the return type
+    typedef _Result 	result_type;
+};
+```
+注意，如果直接去sizeof() 上述的两个类，得到大小会是 1 (即使没有成员)
+>空类的大小为1，为了区分实例化后的对象，这里的空类只是不含数据(有可能会有函数)。源码见[empty_class](empty_class.cpp)。
+## 2. templates相关
+template有 class template 、 function template、member template。member template指的是class的成员使用了模板，例如 class A有个pair函数，pair的输入就可以是任意。这就是个member template。  
+模板又存在模板特化和偏特化。这个在STL中day1讲了，[template](../STL/day1/template.cpp)。  
+>1. typename只有在写模板参数那里共通,其他地方不共通。`template<class T> 等同于 template<typename T>`。   
+> 2. 模板模板参数是一种特殊形式，如
+>`template<typename T,template<typename T> class Container>`,意思就是以T为Container的元素参数类型。但是由于Container实例化不止一个参数，还有默认的allocator，所以需要把allocator也作为参数加进去。如果只需要一个参数，例如Smart_ptr，那就可以直接构建。
+## 3. c++2.0
+c++2.0 主要讲的就是 since C++11。[cpp2.0](c++2.0.cpp)示例。可以通过`cout<<__cplusplus`来看编译器版本。`__cplusplus`是个宏，定义好的。
+### 1. 数量不定的模板参数
+语法`template<typename T,typename... Args>`,意为要接受两组参数，第一组是T，第二组数量未定。  
+以函数模板为例, ... 的位置如下所示：
+```
+void print(){};
+void print(const T& firstArg,const Args&... args ){
+    cout<<firstArg<<endl;
+    print(args...) // 注意这个... 放args后面
+};
+```
+并且需要函数重载，因为最后传入的参数是0个，所以需要重载一个无传参数的。
+>sizeof...(args)可以得到 **这一包** 的参数个数。
+
+### 2. auto 和 for循环
+auto进行类型自动推导，for循环在c++11中可以有新写法：
+>`for auto ele :vec:` 和 `for auto& ele :vec:`，前者不能更改容器元素，后者可以。  
+
+关于引用，引用底层实现也是指针（按道理大小是8字节），但是为了营造假象，假如a是b的引用，那么a和b的大小相同，a和b的地址也相同。
+> 1. reference用的最多的就是参数传递，不常用声明变量。
+> 2. 在参数传递时：```void fun1(const int a){}; 和 void fun1(const int& a){}```,这两个不能同时存在，要不然会存在歧义，假如fun1(10)，编译器不知道在调用哪个函数。
+
+
+## 4. 对象模型
+### 1. 虚函数 虚表指针 虚表
+以侯捷老师讲义上图片为例：![alt text](photos/vptr.jpg)
+关于虚表指针和虚表：虚表指针在内存里最前面。
+> 1. 讲义最下面是调用顺序转为C的写法。解释：首先 p 通过 -> 操作符访问其 vptr 成员，这是一个指针数组。然后，通过 [] 操作符使用索引 n 访问这个指针数组的第 n 个元素，得到一个新的指针。最后，* 操作符对这个新指针进行解引用，得到该指针指向的值。
+> 2. 两者等效，因为*的优先级最低。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
