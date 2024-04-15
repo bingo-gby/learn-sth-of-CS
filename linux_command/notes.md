@@ -37,7 +37,7 @@ linux由 linux内核、shell、文件系统和第三方应用软件组成，基�
 
 ## 2. 文件基本属性
 通常用 `ls -l`列举 文件的所有属性，l意味着long。如下所示：
-![alt text](photos/image.png)
+![alt text](photos/image.png)  
 第一个字母有可能是 d l -(分别代表目录、链接文档、文件，链接文档类似于windows下的快捷方式)，之后字母是按照rwx（代表读写执行，用数字表示为 4 2 1）的顺序展开，重复3次（代表文件所有者、文件所有者同组、其他用户）。如果没有对应权限，会用 - 代替。  
 常用指令 `chmod -R 777 文件或目录`, -R代表递归改变，7为属性的值的相加，也可以 `chmod u=rwx,g=rw,o=x`文件名来设定文件权限。
 > 个人理解：为什么这个不用 -r 代表递归，是因为 在chmod中改变权限中 r代表 read，用 -R是为了避免歧义。
@@ -67,26 +67,27 @@ mkdir：创建目录
 
 rmdir:移除空目录
 >1. -p,迭代删除空目录，如果目录层级是这样 test1/test1 test2 test3，`rmdir -p test1/test1` 之后就只剩 test2 test3 两个空目录了。如果直接 `rmdir test1` 会报错，因为test1不是空目录。
-![alt text](photos/rmdir.png)
+![alt text](photos/rmdir.png)  
 
 #### 4.1 rm
 上述的 rmdir是用来移除空目录，rm是更强大的，可以用来删除非空目录，但是rm 通常是不能用来删除目录的，是用来删除文件。
 >1. -f (代表force),强制
 >2. -i (means interactive),交互性的
-![alt text](photos/rm-i.png)
+![alt text](photos/rm-i.png)    
 >3. -r 递归性的
 
 ### 5. cp(复制文件或目录)
 语法： `cp source destination`,复制的过程中也可以进行重命名操作。例如:
-![alt text](photos/cp.png),但是复制 directory的时候 需要添加 -r，代表递归操作。
+![alt text](photos/cp.png)  
+但是复制 directory的时候 需要添加 -r，代表递归操作。
 
 ### 6. mv (移动文件或目录)
 与上面 cp不同，mv是move。
 > 参数有 -f -i ，意思跟上面的类似
 
-![alt text](photos/mv.png)
+![alt text](photos/mv.png)  
 mv还可以用来改名，如上。也用来移动目录，如下。
-![alt text](photos/mv2.png)
+![alt text](photos/mv2.png)  
 
 
 ## 4. 文件查看
@@ -136,7 +137,7 @@ nl means number line 编号行，会直接显示行号。
 ## 8. 搜索
 1. whereis file 通常用来寻找跟file相关的文件
 2. which 一般只找可执行文件
-![alt text](photos/search.png)
+![alt text](photos/search.png)  
 3. 文件系统递归寻找文件时，用 find:find [path] [options] [expression]
    1. 例如`find . -type f -name "*.txt"` 当前目录下按照文件类型找 .txt结尾的文件
 4. 文件中寻找内容时用grep，例如 grep "111" binyun.txt
