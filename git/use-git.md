@@ -1,3 +1,27 @@
+<!-- TOC -->
+
+- [git notes](#git-notes)
+  - [git常用命令](#git常用命令)
+  - [基础篇](#基础篇)
+    - [合并分支 merge rebase](#合并分支-merge-rebase)
+      - [git merge](#git-merge)
+      - [git rebase](#git-rebase)
+  - [高级篇](#高级篇)
+    - [分支移动](#分支移动)
+    - [撤销分支](#撤销分支)
+      - [git reset](#git-reset)
+      - [git revert](#git-revert)
+  - [远程分享代码篇](#远程分享代码篇)
+    - [git clone](#git-clone)
+    - [git fetch](#git-fetch)
+    - [git pull](#git-pull)
+    - [案例](#案例)
+    - [远程](#远程)
+  - [进阶篇](#进阶篇)
+    - [git cherry-pick](#git-cherry-pick)
+    - [git rebase -i](#git-rebase--i)
+
+<!-- /TOC -->
 # git notes
 主要通过git小游戏来学习git的使用，链接 https://learngitbranching.js.org/?locale=zh_CN
 ## git常用命令
