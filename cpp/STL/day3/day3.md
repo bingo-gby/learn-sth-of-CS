@@ -1,3 +1,13 @@
+<!-- TOC -->
+
+- [RB-tree](#rb-tree)
+- [set multiset](#set-multiset)
+- [map mutlimap](#map-mutlimap)
+  - [map的\[\]](#map的)
+- [hashtable](#hashtable)
+- [unordered\_map unordered\_multimap unordered\_set unordered\_multiset](#unordered_map-unordered_multimap-unordered_set-unordered_multiset)
+
+<!-- /TOC -->
 # RB-tree
 RB-tree是红黑树，是map和set的底层，会自动排序，红黑树是平衡二元搜索树，有利于insert和 search，平衡意味着左右子树深度差不大，便于寻找.rb_tree提供两种insert操作，insert_unique() 和 insert_equal(),前者插不重复的，后者插重复的  
 rb_tree用三个参数：

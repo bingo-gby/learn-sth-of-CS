@@ -1,3 +1,27 @@
+<!-- TOC -->
+
+- [Algorithms](#algorithms)
+- [Iterator Category](#iterator-category)
+- [iterator\_category 对算法的影响](#iterator_category-对算法的影响)
+- [算法源码部分剖析](#算法源码部分剖析)
+- [仿函数 functors](#仿函数-functors)
+- [适配器 Adapter](#适配器-adapter)
+  - [容器适配器](#容器适配器)
+  - [函数适配器](#函数适配器)
+    - [bind2nd](#bind2nd)
+    - [not1](#not1)
+    - [bind](#bind)
+      - [绑定函数or 函数对象](#绑定函数or-函数对象)
+      - [绑定成员函数](#绑定成员函数)
+      - [绑定成员](#绑定成员)
+  - [迭代器适配器](#迭代器适配器)
+    - [reverse\_iterator](#reverse_iterator)
+    - [inserter](#inserter)
+  - [X适配器](#x适配器)
+    - [ostream\_iterator](#ostream_iterator)
+    - [istream\_iterator](#istream_iterator)
+
+<!-- /TOC -->
 # Algorithms
 container的Iterator 必须要能回答Algorithms的所有提问，才可以搭配算法的操作。算法其实是 function template(函数模板)，其余组件是class template。
 

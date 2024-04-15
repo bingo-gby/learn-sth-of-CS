@@ -1,3 +1,15 @@
+<!-- TOC -->
+
+- [一个万能的hash function](#一个万能的hash-function)
+- [tuple](#tuple)
+- [type\_traits](#type_traits)
+  - [is\_void](#is_void)
+  - [is\_integral](#is_integral)
+  - [is\_class is\_union is\_enum is\_pod](#is_class-is_union-is_enum-is_pod)
+- [cout 研究](#cout-研究)
+- [moveable](#moveable)
+
+<!-- /TOC -->
 # 一个万能的hash function
 一种思路：将obj的各个参数分别去hash，分别将hash_code加起来,但是这种不太适合，有一种通过递归的思路如下：
 ![hash function](photos/hashfunc.jpg)  

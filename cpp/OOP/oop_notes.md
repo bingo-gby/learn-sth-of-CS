@@ -1,5 +1,40 @@
+<!-- TOC -->
+
+- [OOP notes 1st](#oop-notes-1st)
+  - [1. 头文件.h 和源文件 .cpp](#1-头文件h-和源文件-cpp)
+  - [2. without pointer class中layout](#2-without-pointer-class中layout)
+    - [inline关键字](#inline关键字)
+    - [数据访问](#数据访问)
+    - [构造函数](#构造函数)
+    - [操作符重载和临时对象](#操作符重载和临时对象)
+  - [3. with pointer class中layout](#3-with-pointer-class中layout)
+    - [1. 拷贝构造 赋值](#1-拷贝构造-赋值)
+    - [2. 栈和堆](#2-栈和堆)
+  - [4. class之间的关系](#4-class之间的关系)
+    - [1. 复合 has-a](#1-复合-has-a)
+    - [2. 委托关系](#2-委托关系)
+    - [3. 继承关系 is-a](#3-继承关系-is-a)
+    - [4. 某些设计模式 design\_mode示例](#4-某些设计模式-design_mode示例)
+- [OOP notes 2nd](#oop-notes-2nd)
+  - [1. functions相关](#1-functions相关)
+    - [1. conversion function 转换函数](#1-conversion-function-转换函数)
+    - [2. non-explict-one-argument ctor 隐式转换函数](#2-non-explict-one-argument-ctor-隐式转换函数)
+    - [3. pointer-like class(智能指针) 和 function-like class(仿函数)](#3-pointer-like-class智能指针-和-function-like-class仿函数)
+  - [2. templates相关](#2-templates相关)
+  - [3. c++2.0](#3-c20)
+    - [1. 数量不定的模板参数](#1-数量不定的模板参数)
+    - [2. auto 和 for循环](#2-auto-和-for循环)
+  - [4. 对象模型](#4-对象模型)
+    - [1. 虚函数 虚表指针 虚表](#1-虚函数-虚表指针-虚表)
+    - [2. 关于this](#2-关于this)
+  - [5. 额外需了解的](#5-额外需了解的)
+    - [1. 关于const](#1-关于const)
+    - [2. new 和 delete](#2-new-和-delete)
+
+<!-- /TOC -->
+
 # OOP notes 1st
-关于面向对象高级编程（上）的笔记
+关于面向对象高级编程（上）的笔记  
 
 ## 1. 头文件.h 和源文件 .cpp
 头文件声明，源文件实现，源文件包含头文件和 标准库的某些文件。包含头文件时：
